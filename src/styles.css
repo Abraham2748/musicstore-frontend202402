@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/styles/colors.css";
+@import "./assets/styles/material.css";
 
 html {
   height: 100%;
