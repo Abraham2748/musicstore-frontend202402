@@ -5,9 +5,9 @@
     <mat-form-field>
       <mat-label>Género musical</mat-label>
       <mat-select>
-        <mat-option value="1">Rock</mat-option>
-        <mat-option value="2">Salsa</mat-option>
-        <mat-option value="3">Bachata</mat-option>
+        <mat-option *ngFor="let genre of genres" [value]="genre.id">{{
+          genre.name
+        }}</mat-option>
       </mat-select>
     </mat-form-field>
     <span>Selecciona tu género musical favorito</span>
