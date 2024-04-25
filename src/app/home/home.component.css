@@ -1,9 +1,10 @@
 .container {
   display: flex;
-  justify-content: center;
-  & .superior {
+  align-items: center;
+  flex-direction: column;
+  & .filter {
     display: flex;
-    width: 700px;
+    width: 940px;
     gap: 20px;
     align-items: center;
     margin-top: 30px;
@@ -12,5 +13,14 @@
       font-weight: 500;
       font-size: 16px;
     }
+  }
+  & .event-list {
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
 }
