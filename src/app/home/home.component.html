@@ -13,14 +13,10 @@
     <span>Selecciona tu género musical favorito</span>
   </section>
   <section class="event-list">
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
-    <app-event-card></app-event-card>
+    <app-event-card
+      *ngFor="let concert of concerts"
+      [data]="concert"
+    ></app-event-card>
   </section>
 </div>
 
