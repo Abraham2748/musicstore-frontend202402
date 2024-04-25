@@ -6,9 +6,8 @@ header {
   & .container {
     width: 1000px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 50px;
     & .logo-container {
       display: flex;
       align-items: center;
@@ -25,7 +24,7 @@ header {
       }
     }
     & .search-bar {
-      width: 300px;
+      width: 400px;
       height: 30px;
       border-radius: 8px;
       padding-left: 10px;
