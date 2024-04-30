@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../shared/components/header/header.component';
 import { FooterComponent } from '../shared/components/footer/footer.component';
+import { SimpleHeaderComponent } from '../shared/components/simple-header/simple-header.component';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [SimpleHeaderComponent, FooterComponent],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css',
 })
