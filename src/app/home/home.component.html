@@ -1,23 +1,14 @@
-<app-header></app-header>
-
-<div class="container">
-  <section class="filter">
-    <mat-form-field>
-      <mat-label>Género musical</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let genre of genres" [value]="genre.id">{{
-          genre.name
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <span>Selecciona tu género musical favorito</span>
-  </section>
-  <section class="event-list">
-    <app-event-card
-      *ngFor="let concert of concerts"
-      [data]="concert"
-    ></app-event-card>
-  </section>
-</div>
+        <mat-select [formControl]="currentGenre">
+          <mat-option [value]="0">Todos</mat-option>
+          <mat-option *ngFor="let genre of genres" [value]="genre.id">{{
+            genre.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span>Selecciona tu género musical favorito</span>
+    </section>
+    <section class="event-list">
+      <app-event-card
+        *ngFor="let concert of currentConcerts"
 
 <app-footer></app-footer>
