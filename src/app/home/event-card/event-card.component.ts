@@ -1,10 +1,11 @@
 import { Component, Input, OnInit, input } from '@angular/core';
 import { Concert } from '../../shared/models/concert.model';
+import { TextLimitPipe } from '../../shared/pipes/text-limit.pipe';
 
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [],
+  imports: [TextLimitPipe],
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.css',
 })
