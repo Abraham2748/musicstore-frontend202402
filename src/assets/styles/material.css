@@ -1,3 +1,43 @@
 @import "./colors.css";
 :root {
+  /* Override material outlined text field colors */
+  --mdc-outlined-text-field-input-text-color: white;
+  --mdc-outlined-text-field-label-text-color: var(--primary-color);
+  --mdc-outlined-text-field-focus-label-text-color: var(--primary-color);
+  --mdc-outlined-text-field-outline-color: var(--primary-color);
+  --mdc-outlined-text-field-focus-outline-color: var(--primary-color);
+  --mdc-outlined-text-field-hover-outline-color: var(--primary-color);
+  --mdc-outlined-text-field-hover-label-text-color: white;
+
+  /* Override material outlined select field colors */
+  --mat-select-enabled-trigger-text-color: white;
+  --mat-option-label-text-color: var(--primary-color);
+  --mat-select-panel-background-color: var(--secondary-color);
+  --mat-option-selected-state-label-text-color: white;
+  --mat-select-enabled-arrow-color: var(--primary-color);
+  --mat-select-focused-arrow-color: white;
+  --mdc-filled-text-field-container-color: var(--secondary-color);
+  --mdc-filled-text-field-focus-label-text-color: var(--primary-color);
+  --mdc-filled-text-field-label-text-color: var(--primary-color);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--accent-color);
+  --mdc-filled-text-field-hover-label-text-color: white;
+}
+
+/*  Override material raised button colors */
+.mat-mdc-raised-button:not(:disabled).mat-primary {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+.mat-mdc-raised-button:not(:disabled).mat-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+.mat-mdc-raised-button:not(:disabled).mat-accent {
+  background-color: var(--accent-color);
+}
+
+/*  Override material select check icon color */
+.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
+  color: white !important;
 }
