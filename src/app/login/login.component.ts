@@ -4,6 +4,7 @@ import { SimpleHeaderComponent } from '../shared/components/simple-header/simple
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   FormControl,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -11,6 +12,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -24,17 +26,17 @@ import { RouterLink } from '@angular/router';
     ReactiveFormsModule,
     MatButtonModule,
     RouterLink,
+    JsonPipe,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-  passwordFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(8),
-  ]);
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+  });
 }
