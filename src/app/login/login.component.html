@@ -7,8 +7,52 @@
     </div>
   </div>
 
-  <div class="form-container">
-    <div class="form-sub-container"></div>
+  <div class="content-container">
+    <div class="content-sub-container">
+      <div class="card-container box-shadow">
+        <div class="form-container">
+          <span class="title"> INICIO DE SESIÓN </span>
+          <form>
+            <mat-form-field class="email" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput [formControl]="emailFormControl" />
+              @if (emailFormControl.hasError('email') &&
+              !emailFormControl.hasError('required')) {
+              <mat-error>Ingresa un email válido</mat-error>
+              } @if (emailFormControl.hasError('required')) {
+              <mat-error>Email es <strong>requerido</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="password" appearance="outline">
+              <mat-label>Contraseña</mat-label>
+              <input
+                type="password"
+                matInput
+                [formControl]="passwordFormControl"
+              />
+              @if (passwordFormControl.hasError('minlength') &&
+              !passwordFormControl.hasError('required')) {
+              <mat-error class="min-length-error"
+                >Contraseña debe tener al menos 8 dígitos</mat-error
+              >
+              } @if (passwordFormControl.hasError('required')) {
+              <mat-error>Contraseña es <strong>requerida</strong></mat-error>
+              }
+            </mat-form-field>
+            <div class="forgot-password">
+              <a routerLink="/forgot-password">¿Olvidaste tu contraseña?</a>
+            </div>
+            <button mat-raised-button color="primary">INGRESAR</button>
+            <div class="register">
+              <span
+                >Si no tienes una cuenta
+                <a routerLink="/register">regístrate</a></span
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
   <app-footer></app-footer>
