@@ -7,8 +7,98 @@
     </div>
   </div>
 
-  <div class="form-container">
-    <div class="form-sub-container"></div>
+  <div class="content-container">
+    <div class="content-sub-container">
+      <div class="card-container box-shadow">
+        <div class="form-container">
+          <span class="title"> REGISTRO </span>
+          <form [formGroup]="registerForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Nombres</mat-label>
+              <input type="text" matInput formControlName="name" />
+              @if (registerForm.controls.name.hasError('required')) {
+              <mat-error>Nombre es <strong>requerido</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Apellidos</mat-label>
+              <input type="text" matInput formControlName="lastName" />
+              @if (registerForm.controls.lastName.hasError('required')) {
+              <mat-error>Apellido es <strong>requerido</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput formControlName="email" />
+              @if (registerForm.controls.email.hasError('email') &&
+              !registerForm.controls.email.hasError('required')) {
+              <mat-error>Ingresa un email válido</mat-error>
+              } @if (registerForm.controls.email.hasError('required')) {
+              <mat-error>Email es <strong>requerido</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Edad</mat-label>
+              <input type="number" matInput formControlName="age" />
+              @if (registerForm.controls.age.hasError('required')) {
+              <mat-error>Edad es <strong>requerida</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Contraseña</mat-label>
+              <input
+                type="password"
+                matInput
+                [formControl]="registerForm.controls.password"
+              />
+              @if (registerForm.controls.password.hasError('minlength') &&
+              !registerForm.controls.password.hasError('required')) {
+              <mat-error class="min-length-error"
+                >Contraseña debe tener al menos 8 dígitos</mat-error
+              >
+              } @if (registerForm.controls.password.hasError('required')) {
+              <mat-error>Contraseña es <strong>requerida</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Documento</mat-label>
+              <mat-select formControlName="documentType">
+                <mat-option value="0">DNI</mat-option>
+                <mat-option value="1">CE</mat-option>
+                <mat-option value="2">PASAPORTE</mat-option>
+                <mat-option value="3">OTROS</mat-option>
+              </mat-select>
+              @if (registerForm.controls.documentType.hasError('required')) {
+              <mat-error>Documento es <strong>requerido</strong></mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Número de documento</mat-label>
+              <input type="text" matInput formControlName="documentNumber" />
+              @if (registerForm.controls.documentNumber.hasError('required')) {
+              <mat-error
+                >Número de documento es <strong>requerido</strong></mat-error
+              >
+              }
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="registerForm.invalid"
+              (click)="register()"
+            >
+              REGISTRAR
+            </button>
+            <div class="register">
+              <span
+                >Si ya tienes una cuenta
+                <a routerLink="/login">ingresa</a></span
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
   <app-footer></app-footer>
