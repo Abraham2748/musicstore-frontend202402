@@ -32,4 +32,47 @@ export const routes: Routes = [
         (m) => m.ForgotPasswordComponent
       ),
   },
+  {
+    path: 'admin',
+    pathMatch: 'prefix',
+    loadComponent: () =>
+      import('./admin/admin.component').then((m) => m.AdminComponent),
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'sales',
+      },
+      {
+        path: 'sales',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./admin/sales/sales.component').then((m) => m.SalesComponent),
+      },
+      {
+        path: 'events',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./admin/events/events.component').then(
+            (m) => m.EventsComponent
+          ),
+      },
+      {
+        path: 'genres',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./admin/genres/genres.component').then(
+            (m) => m.GenresComponent
+          ),
+      },
+      {
+        path: 'reports',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./admin/reports/reports.component').then(
+            (m) => m.ReportsComponent
+          ),
+      },
+    ],
+  },
 ];
