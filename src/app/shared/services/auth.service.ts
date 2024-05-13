@@ -8,7 +8,7 @@ import {
   LoginRequestBody,
   RegisterApiResponse,
   RegisterRequestBody,
-} from './auth.model';
+} from '../models/auth.model';
 import { Observable, catchError, of } from 'rxjs';
 
 @Injectable({

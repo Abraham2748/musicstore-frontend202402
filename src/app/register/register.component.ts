@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
-import { RegisterRequestBody } from '../shared/services/auth.model';
+import { RegisterRequestBody } from '../shared/models/auth.model';
 
 @Component({
   selector: 'app-register',
