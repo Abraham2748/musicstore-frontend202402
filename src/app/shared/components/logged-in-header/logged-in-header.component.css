@@ -32,10 +32,10 @@ header {
     & .buttons-container {
       display: flex;
       gap: 20px;
-      & .login {
+      & .my-account {
         color: var(--primary-color);
       }
-      & .register {
+      & .logout {
         color: var(--accent-color);
       }
     }
