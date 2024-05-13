@@ -1,16 +1,12 @@
-import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { SimpleHeaderComponent } from '../shared/components/simple-header/simple-header.component';
 import { FooterComponent } from '../shared/components/footer/footer.component';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -21,7 +17,6 @@ import { FooterComponent } from '../shared/components/footer/footer.component';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
     MatButtonModule,
     RouterLink,
   ],
@@ -29,8 +24,15 @@ import { FooterComponent } from '../shared/components/footer/footer.component';
   styleUrl: './forgot-password.component.css',
 })
 export class ForgotPasswordComponent {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  authService = inject(AuthService);
+  onSubmit(email: string) {
+    this.authService.forgotPassword(email).subscribe((response) => {
+      console.log('response', response);
+      if (response.success) {
+        console.log('Success');
+      } else {
+        console.log('Fail');
+      }
+    });
+  }
 }

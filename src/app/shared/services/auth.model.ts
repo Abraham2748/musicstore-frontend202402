@@ -32,3 +32,13 @@ export interface RegisterRequestBody {
   age: number;
   confirmPassword: string;
 }
+
+//FORGOT PASSWORD
+export interface ForgotPasswordApiResponse {
+  success: boolean;
+  errorMessage: string;
+}
+
+export interface ForgotPasswordRequestBody {
+  email: string;
+}

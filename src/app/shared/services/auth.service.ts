@@ -2,6 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import {
+  ForgotPasswordApiResponse,
+  ForgotPasswordRequestBody,
   LoginApiResponse,
   LoginRequestBody,
   RegisterApiResponse,
@@ -39,6 +41,21 @@ export class AuthService {
           success: false,
           data: { expirationDate: '', token: '', userId: '' },
           errorMessage: httpErrorResponse.error.errorMessage || 'Unknown error',
+        };
+        return of(errorResponse);
+      })
+    );
+  }
+
+  forgotPassword(email: string): Observable<ForgotPasswordApiResponse> {
+    const apiUrl = this.baseUrl + '/api/users/RequestTokenToResetPassword';
+    const body: ForgotPasswordRequestBody = { email };
+    return this.http.post<ForgotPasswordApiResponse>(apiUrl, body).pipe(
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        const errorResponse: ForgotPasswordApiResponse = {
+          success: false,
+          errorMessage:
+            httpErrorResponse.error?.errorMessage || 'Unknown error',
         };
         return of(errorResponse);
       })
