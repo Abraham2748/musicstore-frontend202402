@@ -12,9 +12,6 @@
       <div class="card-container box-shadow">
         <div class="form-container">
           <span class="title"> INICIO DE SESIÓN </span>
-          <div style="color: white">
-            {{ loginForm.value | json }}
-          </div>
           <form [formGroup]="loginForm">
             <mat-form-field class="email" appearance="outline">
               <mat-label>Email</mat-label>
@@ -45,7 +42,14 @@
             <div class="forgot-password">
               <a routerLink="/forgot-password">¿Olvidaste tu contraseña?</a>
             </div>
-            <button mat-raised-button color="primary">INGRESAR</button>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="loginForm.invalid"
+              (click)="login()"
+            >
+              INGRESAR
+            </button>
             <div class="register">
               <span
                 >Si no tienes una cuenta
