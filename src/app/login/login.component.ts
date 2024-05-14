@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
@@ -38,6 +38,7 @@ export class LoginComponent {
   });
 
   authService = inject(AuthService);
+  router = inject(Router);
 
   login() {
     const email = this.loginForm.controls.email.value!;
@@ -47,6 +48,8 @@ export class LoginComponent {
       if (response && response.success) {
         // Redirect to the customer page
         console.log('Login successful');
+        localStorage.setItem('token', response.data.token);
+        this.router.navigate(['/home']);
       } else {
         // Display an error notification
         console.log('Login failed');
