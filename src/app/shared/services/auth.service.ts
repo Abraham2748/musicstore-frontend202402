@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import {
   ForgotPasswordApiResponse,
@@ -17,6 +17,8 @@ import { Observable, catchError, of } from 'rxjs';
 export class AuthService {
   private http = inject(HttpClient);
   private baseUrl = environment.baseUrl;
+
+  loading = signal(false);
 
   login(email: string, password: string): Observable<LoginApiResponse> {
     const apiUrl = this.baseUrl + '/api/users/login';

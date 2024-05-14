@@ -1,4 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { finalize, tap } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req);
@@ -14,4 +17,18 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
     });
   }
   return next(clonedRequest);
+};
+
+export const loadingScreenInterceptor: HttpInterceptorFn = (req, next) => {
+  const authService = inject(AuthService);
+  return next(req).pipe(
+    tap(() => {
+      //show loading screen
+      authService.loading.set(true);
+    }),
+    finalize(() => {
+      //hide loading screen
+      authService.loading.set(false);
+    })
+  );
 };
