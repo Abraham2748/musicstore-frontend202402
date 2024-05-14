@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { RegisterRequestBody } from '../shared/models/auth.model';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-register',
@@ -48,6 +49,8 @@ export class RegisterComponent {
 
   authService = inject(AuthService);
 
+  notifications = inject(NotificationsService);
+
   register() {
     const body: RegisterRequestBody = {
       documentNumber: this.registerForm.controls.documentNumber.value!,
@@ -67,9 +70,11 @@ export class RegisterComponent {
       if (response && response.success) {
         // Redirect to the customer page
         console.log('Register successful');
+        this.notifications.success('Registro exitoso', 'Bienvenido');
       } else {
         // Display an error notification
         console.log('Register failed');
+        this.notifications.error('Registro fallido', 'Intenta otra vez');
       }
     });
   }
