@@ -11,7 +11,14 @@
       <button mat-button class="my-account" routerLink="/my-account">
         MI CUENTA
       </button>
-      <button mat-button class="logout">CERRAR SESIÓN</button>
+      <button
+        mat-button
+        class="logout"
+        routerLink="/home"
+        (click)="authService.logout()"
+      >
+        CERRAR SESIÓN
+      </button>
     </div>
   </div>
 </header>

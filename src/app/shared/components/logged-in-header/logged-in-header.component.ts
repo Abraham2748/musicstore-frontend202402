@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-logged-in-header',
@@ -9,4 +10,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './logged-in-header.component.html',
   styleUrl: './logged-in-header.component.css',
 })
-export class LoggedInHeaderComponent {}
+export class LoggedInHeaderComponent {
+  authService = inject(AuthService);
+}
