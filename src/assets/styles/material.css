@@ -41,3 +41,8 @@
 .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
   color: white !important;
 }
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 8px !important;
+  border: 8px solid var(--secondary-color) !important;
+}

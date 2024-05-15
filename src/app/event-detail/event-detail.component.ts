@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { BuyDialogComponent } from './buy-dialog/buy-dialog.component';
+import { VoucherDialogComponent } from '../shared/components/voucher-dialog/voucher-dialog.component';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-event-detail',
@@ -30,6 +32,7 @@ export class EventDetailComponent implements OnInit {
   router = inject(Router);
   eventDetailService = inject(EventDetailService);
   matDialog = inject(MatDialog);
+  notificationsService = inject(NotificationsService);
 
   data$ = new Observable<Concert>();
 
@@ -46,11 +49,22 @@ export class EventDetailComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.matDialog.open(BuyDialogComponent, {
+    const buyDialogRef = this.matDialog.open(BuyDialogComponent, {
       data: this.concertData,
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+    buyDialogRef.afterClosed().subscribe((saleId) => {
+      if (saleId) {
+        this.notificationsService.success(
+          'Compra exitosa!',
+          'Voucher generado'
+        );
+        const voucherDialogRef = this.matDialog.open(VoucherDialogComponent, {
+          data: { saleId },
+        });
+        voucherDialogRef.afterClosed().subscribe(() => {
+          this.router.navigate(['/home']);
+        });
+      }
     });
   }
 }
