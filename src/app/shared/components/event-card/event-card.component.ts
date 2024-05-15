@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, input } from '@angular/core';
-import { Concert } from '../../shared/models/concert.model';
-import { TextLimitPipe } from '../../shared/pipes/text-limit.pipe';
+import { Component, Input, OnInit } from '@angular/core';
+import { Concert } from '../../models/concert.model';
+import { TextLimitPipe } from '../../pipes/text-limit.pipe';
 
 @Component({
   selector: 'app-event-card',
