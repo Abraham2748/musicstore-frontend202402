@@ -9,7 +9,15 @@ import { Genre } from '../shared/models/genre.model';
 import { Concert } from '../shared/models/concert.model';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
-import { Observable, map, shareReplay, startWith, switchMap } from 'rxjs';
+import {
+  Observable,
+  combineLatest,
+  map,
+  shareReplay,
+  startWith,
+  switchMap,
+} from 'rxjs';
+import { SearchBarService } from './services/search-bar.service';
 
 @Component({
   selector: 'app-home',
@@ -28,30 +36,47 @@ import { Observable, map, shareReplay, startWith, switchMap } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   genres$ = new Observable<Genre[]>();
-  initialConcerts$ = new Observable<Concert[]>();
   filteredConcerts$ = new Observable<Concert[]>();
 
   homeService = inject(HomeService);
+  searchBarService = inject(SearchBarService);
 
   currentGenre = new FormControl(0);
 
   ngOnInit() {
-    const data$ = this.homeService.getData().pipe(shareReplay());
+    const data$ = this.homeService.getData().pipe(shareReplay(1));
+
     this.genres$ = data$.pipe(
       map((data) => data.genres.filter((genre) => genre.status))
     );
-    this.initialConcerts$ = data$.pipe(map((data) => data.concerts));
 
-    this.filteredConcerts$ = this.currentGenre.valueChanges.pipe(
+    const initialConcerts$ = data$.pipe(map((data) => data.concerts));
+
+    const filterByGenre$ = this.currentGenre.valueChanges.pipe(
       startWith(0),
       switchMap((genreId) =>
-        genreId === 0
-          ? this.initialConcerts$
-          : this.initialConcerts$.pipe(
-              map((concerts) =>
-                concerts.filter((concert) => concert.genreId === genreId)
-              )
-            )
+        initialConcerts$.pipe(
+          map((concerts) =>
+            genreId === 0
+              ? concerts
+              : concerts.filter((concert) => concert.genreId === genreId)
+          )
+        )
+      )
+    );
+
+    this.filteredConcerts$ = combineLatest([
+      filterByGenre$,
+      this.searchBarService.currentValue$,
+    ]).pipe(
+      map(([concerts, searchValue]) =>
+        concerts.filter((concert) =>
+          searchValue === ''
+            ? true
+            : concert.description
+                .toLowerCase()
+                .includes(searchValue.toLowerCase())
+        )
       )
     );
   }

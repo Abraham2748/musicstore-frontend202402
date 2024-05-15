@@ -5,7 +5,12 @@
       <h1>MUSICAL EVENTS</h1>
     </div>
     <div>
-      <input class="search-bar" type="text" placeholder="Buscar..." />
+      <input
+        class="search-bar"
+        type="text"
+        placeholder="Buscar..."
+        [formControl]="searchBarFormControl"
+      />
     </div>
     <div class="buttons-container">
       <button mat-button class="login" routerLink="/login">INGRESAR</button>
