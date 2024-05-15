@@ -50,10 +50,12 @@
             "
             >Precio:
             <span style="color: var(--accent-color)"
-              >S/{{ concert.unitPrice }}</span
+              >S/{{ concert.unitPrice.toFixed(2) }}</span
             >
           </span>
-          <button mat-raised-button color="primary">COMPRAR ENTRADA</button>
+          <button mat-raised-button color="primary" (click)="openDialog()">
+            COMPRAR ENTRADA
+          </button>
         </div>
       </div>
       }
