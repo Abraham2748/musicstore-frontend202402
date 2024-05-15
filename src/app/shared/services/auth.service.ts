@@ -21,6 +21,7 @@ export class AuthService {
   private notificationsService = inject(NotificationsService);
   loading = signal(false);
   loggedIn = signal(false);
+  isAdministrator = signal(false);
 
   login(email: string, password: string): Observable<LoginApiResponse> {
     const apiUrl = this.baseUrl + '/api/users/login';

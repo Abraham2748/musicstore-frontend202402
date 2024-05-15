@@ -57,8 +57,10 @@ export class LoginComponent {
           'Bienvenido a Musical Events'
         );
         if (email === 'admin@gmail.com') {
+          this.authService.isAdministrator.set(true);
           this.router.navigate(['/admin']);
         } else {
+          this.authService.isAdministrator.set(false);
           this.router.navigate(['/customer']);
         }
       } else {

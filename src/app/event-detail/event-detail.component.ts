@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BuyDialogComponent } from './buy-dialog/buy-dialog.component';
 import { VoucherDialogComponent } from '../shared/components/voucher-dialog/voucher-dialog.component';
 import { NotificationsService } from 'angular2-notifications';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -33,6 +34,7 @@ export class EventDetailComponent implements OnInit {
   eventDetailService = inject(EventDetailService);
   matDialog = inject(MatDialog);
   notificationsService = inject(NotificationsService);
+  authService = inject(AuthService);
 
   data$ = new Observable<Concert>();
 
@@ -49,6 +51,21 @@ export class EventDetailComponent implements OnInit {
   }
 
   openDialog() {
+    if (!this.authService.loggedIn()) {
+      this.notificationsService.warn(
+        'Inicia sesión',
+        'Debes iniciar sesión para comprar entradas'
+      );
+      this.router.navigate(['/login']);
+      return;
+    }
+    if (this.authService.isAdministrator()) {
+      this.notificationsService.warn(
+        'No autorizado',
+        'No puedes comprar entradas siendo administrador'
+      );
+      return;
+    }
     const buyDialogRef = this.matDialog.open(BuyDialogComponent, {
       data: this.concertData,
     });
