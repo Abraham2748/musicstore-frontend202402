@@ -8,6 +8,8 @@ import { HomeService } from './home.service';
 import { Genre } from '../shared/models/genre.model';
 import { Concert } from '../shared/models/concert.model';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipe } from '@angular/common';
+import { Observable, map, shareReplay, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -19,32 +21,38 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     EventCardComponent,
     ReactiveFormsModule,
+    AsyncPipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  genres: Genre[] = [];
-  initialConcerts: Concert[] = [];
-  currentConcerts: Concert[] = [];
+  genres$ = new Observable<Genre[]>();
+  initialConcerts$ = new Observable<Concert[]>();
+  filteredConcerts$ = new Observable<Concert[]>();
 
   homeService = inject(HomeService);
 
   currentGenre = new FormControl(0);
 
   ngOnInit() {
-    this.homeService.getData().subscribe((data) => {
-      console.log(data);
-      this.genres = data.genres;
-      this.initialConcerts = data.concerts;
-      this.currentConcerts = this.initialConcerts;
-    });
+    const data$ = this.homeService.getData().pipe(shareReplay());
+    this.genres$ = data$.pipe(
+      map((data) => data.genres.filter((genre) => genre.status))
+    );
+    this.initialConcerts$ = data$.pipe(map((data) => data.concerts));
 
-    this.currentGenre.valueChanges.subscribe((value: number | null) => {
-      this.currentConcerts =
-        value === 0
-          ? this.initialConcerts
-          : this.initialConcerts.filter((item) => item.genreId === value);
-    });
+    this.filteredConcerts$ = this.currentGenre.valueChanges.pipe(
+      startWith(0),
+      switchMap((genreId) =>
+        genreId === 0
+          ? this.initialConcerts$
+          : this.initialConcerts$.pipe(
+              map((concerts) =>
+                concerts.filter((concert) => concert.genreId === genreId)
+              )
+            )
+      )
+    );
   }
 }
