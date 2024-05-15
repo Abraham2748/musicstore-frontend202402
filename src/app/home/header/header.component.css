@@ -33,10 +33,10 @@ header {
     & .buttons-container {
       display: flex;
       gap: 20px;
-      & .login {
+      & .primary {
         color: var(--primary-color);
       }
-      & .register {
+      & .accent {
         color: var(--accent-color);
       }
     }

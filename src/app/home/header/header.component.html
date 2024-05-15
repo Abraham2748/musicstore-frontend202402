@@ -12,11 +12,20 @@
         [formControl]="searchBarFormControl"
       />
     </div>
+    @if (authService.loggedIn()) {
     <div class="buttons-container">
-      <button mat-button class="login" routerLink="/login">INGRESAR</button>
-      <button mat-button class="register" routerLink="/register">
+      <button mat-button class="primary">PERFIL</button>
+      <button mat-button class="accent" (click)="authService.logout()">
+        CERRAR SESIÓN
+      </button>
+    </div>
+    } @else {
+    <div class="buttons-container">
+      <button mat-button class="primary" routerLink="/login">INGRESAR</button>
+      <button mat-button class="accent" routerLink="/register">
         REGÍSTRATE
       </button>
     </div>
+    }
   </div>
 </header>

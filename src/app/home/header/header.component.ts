@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { SearchBarService } from '../services/search-bar.service';
 import { startWith, map, debounceTime } from 'rxjs';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ import { startWith, map, debounceTime } from 'rxjs';
 export class HeaderComponent {
   searchBarFormControl = new FormControl('');
   searchBarService = inject(SearchBarService);
+  authService = inject(AuthService);
 
   constructor() {
     this.searchBarService.currentValue$ =

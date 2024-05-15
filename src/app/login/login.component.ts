@@ -51,11 +51,16 @@ export class LoginComponent {
         // Redirect to the customer page
         console.log('Login successful');
         localStorage.setItem('token', response.data.token);
+        this.authService.loggedIn.set(true);
         this.notifications.success(
-          'Inicio de sesión correcto',
+          'Login Exitoso',
           'Bienvenido a Musical Events'
         );
-        this.router.navigate(['/home']);
+        if (email === 'admin@gmail.com') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/customer']);
+        }
       } else {
         // Display an error notification
         this.notifications.error('Login Fallido', 'Revisa tus credenciales');

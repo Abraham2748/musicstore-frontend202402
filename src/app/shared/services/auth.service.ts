@@ -10,6 +10,7 @@ import {
   RegisterRequestBody,
 } from '../models/auth.model';
 import { Observable, catchError, of } from 'rxjs';
+import { NotificationsService } from 'angular2-notifications';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,9 @@ import { Observable, catchError, of } from 'rxjs';
 export class AuthService {
   private http = inject(HttpClient);
   private baseUrl = environment.baseUrl;
-
+  private notificationsService = inject(NotificationsService);
   loading = signal(false);
+  loggedIn = signal(false);
 
   login(email: string, password: string): Observable<LoginApiResponse> {
     const apiUrl = this.baseUrl + '/api/users/login';
@@ -33,6 +35,11 @@ export class AuthService {
         return of(errorResponse);
       })
     );
+  }
+  logout() {
+    localStorage.removeItem('token');
+    this.loggedIn.set(false);
+    this.notificationsService.success('Logout exitoso', 'Hasta luego');
   }
 
   register(body: RegisterRequestBody): Observable<RegisterApiResponse> {
