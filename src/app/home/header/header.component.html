@@ -13,8 +13,15 @@
       />
     </div>
     @if (authService.loggedIn()) {
+
     <div class="buttons-container">
-      <button mat-button class="primary">PERFIL</button>
+      <button
+        mat-button
+        class="primary"
+        [routerLink]="authService.isAdministrator() ? '/admin' : '/customer'"
+      >
+        MENU
+      </button>
       <button mat-button class="accent" (click)="authService.logout()">
         CERRAR SESIÓN
       </button>
