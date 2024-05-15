@@ -4,7 +4,7 @@ import { FooterComponent } from '../shared/components/footer/footer.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { EventCardComponent } from './event-card/event-card.component';
-import { HomeService } from './home.service';
+import { HomeService } from './services/home.service';
 import { Genre } from '../shared/models/genre.model';
 import { Concert } from '../shared/models/concert.model';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
