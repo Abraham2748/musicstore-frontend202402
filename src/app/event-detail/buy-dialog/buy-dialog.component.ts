@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { BuyService } from '../services/buy.service';
 
 @Component({
   selector: 'app-buy-dialog',
@@ -22,9 +23,18 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class BuyDialogComponent {
   data = inject(MAT_DIALOG_DATA) as Concert;
+  buyService = inject(BuyService);
   matDialogRef = inject(MatDialogRef);
 
   buyTickets(quantity: number) {
-    this.matDialogRef.close(quantity);
+    this.buyService
+      .buy(this.data.id.toString(), quantity.toString())
+      .subscribe((response) => {
+        if (response.success) {
+          this.matDialogRef.close(response.data);
+        } else {
+          alert(response.errorMessage);
+        }
+      });
   }
 }
