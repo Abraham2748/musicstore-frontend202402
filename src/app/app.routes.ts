@@ -33,6 +33,19 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'event-detail/:id',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./event-detail/event-detail.component').then(
+        (m) => m.EventDetailComponent
+      ),
+  },
+  {
+    path: 'event-detail',
+    pathMatch: 'full',
+    redirectTo: 'home',
+  },
+  {
     path: 'admin',
     pathMatch: 'prefix',
     loadComponent: () =>

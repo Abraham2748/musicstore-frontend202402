@@ -15,9 +15,12 @@
     </section>
     <section class="event-list">
       @for (concert of filteredConcerts$ | async; track $index) {
-      <app-event-card [data]="concert"></app-event-card>
+      <app-event-card
+        [data]="concert"
+        [routerLink]="'/event-detail/' + concert.id"
+      ></app-event-card>
       } @empty {
-      <h1>No encontramos conciertos de ese género :(</h1>
+      <h1>No encontramos conciertos :(</h1>
       }
     </section>
   </div>

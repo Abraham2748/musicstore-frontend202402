@@ -18,6 +18,7 @@ import {
   switchMap,
 } from 'rxjs';
 import { SearchBarService } from './services/search-bar.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,7 @@ import { SearchBarService } from './services/search-bar.service';
     EventCardComponent,
     ReactiveFormsModule,
     AsyncPipe,
+    RouterLink,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',

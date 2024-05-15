@@ -1,0 +1,63 @@
+<div class="event-detail-container">
+  <app-simple-header></app-simple-header>
+  <div class="container">
+    <section
+      style="
+        max-width: 1000px;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 500;
+        margin-top: 40px;
+        margin-bottom: 60px;
+      "
+    >
+      <span>Compra tus entradas y disfruta!</span>
+    </section>
+    <section style="max-width: 1000px; width: 100%; display: flex">
+      @if (data$ | async; as concert) {
+      <app-event-card [data]="concert"></app-event-card>
+      <div
+        style="
+          width: 750px;
+          height: 360px;
+          background-color: var(--secondary-color);
+          margin-left: 30px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        "
+      >
+        <div style="margin: 20px">
+          <span
+            style="
+              color: var(--primary-color);
+              font-weight: 500;
+              font-size: 16px;
+            "
+            >Acerca del evento</span
+          >
+          <br />
+          <br />
+          <p style="color: white">{{ concert.description }}</p>
+        </div>
+        <div style="margin: 20px">
+          <span
+            style="
+              color: white;
+              margin-right: 20px;
+              font-size: 16px;
+              font-weight: 500;
+            "
+            >Precio:
+            <span style="color: var(--accent-color)"
+              >S/{{ concert.unitPrice }}</span
+            >
+          </span>
+          <button mat-raised-button color="primary">COMPRAR ENTRADA</button>
+        </div>
+      </div>
+      }
+    </section>
+  </div>
+  <app-footer></app-footer>
+</div>
