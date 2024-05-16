@@ -1,4 +1,11 @@
-<div style="display: flex; justify-content: center">
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  "
+>
   <div>
     <canvas
       baseChart
@@ -7,5 +14,12 @@
       [labels]="pieChartLabels"
     >
     </canvas>
+  </div>
+
+  <div
+    (click)="createPdf()"
+    style="display: flex; justify-content: center; cursor: pointer"
+  >
+    <img src="assets/images/admin/pdf.png" alt="" />
   </div>
 </div>
