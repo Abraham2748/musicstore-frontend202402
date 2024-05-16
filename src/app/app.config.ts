@@ -10,6 +10,7 @@ import {
 } from './shared/interceptors/auth.interceptor';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NgxLoadingModule } from 'ngx-loading';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([jwtInterceptor, loadingScreenInterceptor])
     ),
+    provideCharts(withDefaultRegisterables()),
     importProvidersFrom(
       SimpleNotificationsModule.forRoot(),
       NgxLoadingModule.forRoot({})
