@@ -38,9 +38,18 @@ export class AuthService {
     );
   }
   logout() {
-    localStorage.removeItem('token');
+    localStorage.clear();
     this.loggedIn.set(false);
+    this.isAdministrator.set(false);
     this.notificationsService.success('Logout exitoso', 'Hasta luego');
+  }
+
+  verifyLocalStorage() {
+    const token = localStorage.getItem('token');
+    this.loggedIn.set(token ? true : false);
+
+    const isAdministrator = localStorage.getItem('isAdministrator');
+    this.isAdministrator.set(isAdministrator === 'true');
   }
 
   register(body: RegisterRequestBody): Observable<RegisterApiResponse> {

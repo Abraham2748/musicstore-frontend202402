@@ -22,4 +22,8 @@ export class AppComponent {
     timeOut: 3000,
   };
   authService = inject(AuthService);
+
+  constructor() {
+    this.authService.verifyLocalStorage();
+  }
 }

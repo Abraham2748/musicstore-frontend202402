@@ -46,27 +46,19 @@ export class LoginComponent {
     const email = this.loginForm.controls.email.value!;
     const password = this.loginForm.controls.password.value!;
     this.authService.login(email, password).subscribe((response) => {
-      console.log('response', response);
       if (response && response.success) {
-        // Redirect to the customer page
-        console.log('Login successful');
         localStorage.setItem('token', response.data.token);
         this.authService.loggedIn.set(true);
         this.notifications.success(
           'Login Exitoso',
           'Bienvenido a Musical Events'
         );
-        if (email === 'admin@gmail.com') {
-          this.authService.isAdministrator.set(true);
-          this.router.navigate(['/admin']);
-        } else {
-          this.authService.isAdministrator.set(false);
-          this.router.navigate(['/customer']);
-        }
+        const isAdministrator = email === 'admin@gmail.com';
+        this.authService.isAdministrator.set(isAdministrator);
+        localStorage.setItem('isAdministrator', isAdministrator.toString());
+        this.router.navigate([isAdministrator ? '/admin' : '/customer']);
       } else {
-        // Display an error notification
         this.notifications.error('Login Fallido', 'Revisa tus credenciales');
-        console.log('Login failed');
       }
     });
   }
