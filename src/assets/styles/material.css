@@ -21,6 +21,37 @@
   --mdc-filled-text-field-label-text-color: var(--primary-color);
   --mdc-filled-text-field-focus-active-indicator-color: var(--accent-color);
   --mdc-filled-text-field-hover-label-text-color: white;
+  --mdc-outlined-text-field-disabled-label-text-color: gray;
+  --mdc-outlined-text-field-disabled-outline-color: gray;
+  --mat-select-disabled-arrow-color: gray;
+
+  /* Override material table colors*/
+  --mat-table-background-color: #51545d;
+  --mat-paginator-container-background-color: #51545d;
+  --mat-table-header-headline-color: var(--primary-color);
+  --mat-table-row-item-label-text-color: white;
+  --mat-paginator-container-text-color: white;
+  --mat-paginator-enabled-icon-color: var(--primary-color);
+  --mat-paginator-disabled-icon-color: gray;
+  --mat-icon-button-hover-state-layer-opacity: 0.1;
+  --mat-sort-arrow-color: var(--primary-color);
+
+  --mdc-checkbox-unselected-focus-icon-color: var(--primary-color);
+  --mdc-checkbox-unselected-hover-icon-color: white;
+  --mdc-checkbox-unselected-icon-color: var(--primary-color);
+  --mdc-checkbox-unselected-pressed-icon-color: var(--primary-color);
+
+  --mdc-checkbox-selected-focus-icon-color: var(--primary-color);
+  --mdc-checkbox-selected-hover-icon-color: var(--primary-color);
+  --mdc-checkbox-selected-icon-color: var(--primary-color);
+  --mdc-checkbox-selected-pressed-icon-color: var(--primary-color);
+
+  --mat-datepicker-calendar-date-selected-state-background-color: var(
+    --primary-color
+  );
+  --mat-datepicker-calendar-date-hover-state-background-color: var(
+    --accent-color
+  );
 }
 
 /*  Override material raised button colors */
@@ -42,7 +73,26 @@
   color: white !important;
 }
 
+/* Make material dialog rounded */
 .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 8px !important;
   border: 8px solid var(--secondary-color) !important;
+}
+
+/* Override material select item on hover */
+.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background-color: var(--accent-color) !important;
+  color: white;
+}
+
+mat-hint {
+  color: gray;
+}
+
+mat-datepicker-toggle svg {
+  color: var(--primary-color);
+}
+
+.mat-calendar-body-cell:hover > .mat-calendar-body-cell-content {
+  color: white;
 }
