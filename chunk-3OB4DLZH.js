@@ -1,1 +1,0 @@
-import{Lb as s,Pb as r,ga as o,ub as a,vb as i}from"./chunk-3CCYGFLX.js";var m=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=o({type:e,selectors:[["app-sales"]],standalone:!0,features:[r],decls:2,vars:0,template:function(n,l){n&1&&(a(0,"p"),s(1,"sales works!"),i())}});let t=e;return t})();export{m as SalesComponent};

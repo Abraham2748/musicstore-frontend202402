@@ -1,1 +1,0 @@
-import{Lb as r,Pb as s,ga as o,ub as i,vb as a}from"./chunk-3CCYGFLX.js";var d=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=o({type:e,selectors:[["app-events"]],standalone:!0,features:[s],decls:2,vars:0,template:function(n,c){n&1&&(i(0,"p"),r(1,"events works!"),a())}});let t=e;return t})();export{d as EventsComponent};
